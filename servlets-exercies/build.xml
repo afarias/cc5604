@@ -1,0 +1,26 @@
+<project default="war">
+
+    <property name="sources.dir" value="./src"/>
+    <property name="output.dir" value="./out"/>
+    <property name="output.classes.dir" value="./out/classes"/>
+    <property name="output.war.dir" value="./out/artifacts"/>
+
+    <target name="clean">
+        <delete dir="${output.dir}"/>
+    </target>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="${output.classes.dir}"/>
+        <javac srcdir="${sources.dir}" destdir="${output.classes.dir}">
+            <classpath>
+                <pathelement location="/etc/wls12130/oracle_common/modules/javax.servlet_2.2.0.0_3-0.jar" />
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="war">
+        <war destfile="${output.war.dir}/auxiliar2.war" webxml="./web/WEB-INF/web.xml">
+            <classes dir="${output.classes.dir}"/>
+        </war>
+    </target>
+</project>
