@@ -1,0 +1,56 @@
+<project default="war" name="timenow">
+
+    <!-- Standard directory paths -->
+    <property name="sources.dir" value="./src"/>
+    <property name="contents.dir" value="./web"/>
+    <property name="contents.WEB-INF.dir" value="${contents.dir}/WEB-INF"/>
+    <property name="contents.tlds.dir" value="${contents.WEB-INF.dir}/tlds"/>
+
+    <property name="output.dir" value="./out"/>
+    <property name="output.classes.dir" value="./out/classes"/>
+    <property name="output.artifacts.dir" value="./out/artifacts"/>
+
+    <!-- Class path of JEE libraries : try to reference to your server libs -->
+    <path id="libs.server">
+        <pathelement location="/etc/wls12130/oracle_common/modules/javax.servlet_2.2.0.0_3-0.jar"/>
+        <pathelement location="/etc/wls12130/oracle_common/modules/javax.jsp_4.0.0.0_2-2.jar"/>
+    </path>
+
+    <!-- This target removes all the artifacts and classes generated -->
+    <target name="clean">
+        <delete dir="${output.dir}"/>
+    </target>
+
+    <!-- The compilation target for classes -->
+    <target name="compile" depends="clean">
+        <mkdir dir="${output.classes.dir}"/>
+        <javac srcdir="${sources.dir}" destdir="${output.classes.dir}">
+            <classpath refid="libs.server"/>
+        </javac>
+    </target>
+
+    <!-- The WAR target will package the TagLib and a JSP for its testing
+         More info on this task at: https://ant.apache.org/manual/Tasks/war.html -->
+    <target name="war">
+        <war destfile="${output.artifacts.dir}/jstl-timenow-web.war" webxml="${contents.WEB-INF.dir}/web.xml">
+            <fileset dir="${contents.dir}"/>
+            <classes dir="${output.classes.dir}"/>
+        </war>
+    </target>
+
+    <!-- This target is responsible for packaging the custom tag lib in a JAR so it can be imported in
+         other web applications, making it reusable. -->
+    <target name="jar">
+        <jar destfile="${output.artifacts.dir}/jstl-timenow-web.jar" basedir="${output.classes.dir}">
+
+            <!-- The TLD files are to be store inside the META-INF directory -->
+            <metainf dir="${contents.tlds.dir}" />
+        </jar>
+
+        <description>
+            This target is responsible for packaging the custom tag lib in a JAR so it can be imported in
+            other web applications, making it reusable.
+        </description>
+    </target>
+
+</project>
