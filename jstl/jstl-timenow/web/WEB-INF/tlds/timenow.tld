@@ -12,7 +12,7 @@
     <!-- General information about the tag (elements are ordered!) -->
     <tlib-version>1.2.1</tlib-version>
     <short-name>timenow</short-name>
-    <uri>timenow</uri>
+    <uri>http://dcc.uchile.cl/tags/timenow</uri>
 
     <!-- One tag element for each library tag -->
     <tag>
