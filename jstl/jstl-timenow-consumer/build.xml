@@ -1,0 +1,46 @@
+<project default="war" name="timenow-consumer">
+
+    <!-- Standard directory paths -->
+    <property name="sources.dir" value="./src"/>
+    <property name="contents.dir" value="./web"/>
+    <property name="contents.WEB-INF.dir" value="${contents.dir}/WEB-INF"/>
+    <property name="contents.libs.dir" value="${contents.WEB-INF.dir}/libs"/>
+
+    <property name="output.dir" value="./out"/>
+    <property name="output.classes.dir" value="./out/classes"/>
+    <property name="output.artifacts.dir" value="./out/artifacts"/>
+
+    <!-- This property has to be re-define for your weblogic installation path -->
+    <property name="weblogic.home.dir" value="/etc/wls12130"/>
+    <property name="weblogic.modules.dir" value="${weblogic.home.dir}/oracle_common/modules"/>
+
+    <!-- Class path of JEE libraries : try to reference to your server libs -->
+    <path id="libs.server">
+        <pathelement location="${weblogic.modules.dir}/javax.servlet_2.2.0.0_3-0.jar"/>
+        <pathelement location="${weblogic.modules.dir}/javax.jsp_4.0.0.0_2-2.jar"/>
+    </path>
+
+    <!-- This target removes all the artifacts and classes generated -->
+    <target name="clean">
+        <delete dir="${output.dir}"/>
+    </target>
+
+    <!-- The compilation target for classes -->
+    <target name="compile" depends="clean">
+        <mkdir dir="${output.classes.dir}"/>
+        <javac srcdir="${sources.dir}" destdir="${output.classes.dir}">
+            <classpath refid="libs.server"/>
+        </javac>
+    </target>
+
+    <!-- The WAR target will package the TagLib and a JSP for its testing
+         More info on this task at: https://ant.apache.org/manual/Tasks/war.html -->
+    <target name="war">
+        <war destfile="${output.artifacts.dir}/jstl-timenow-web.war" webxml="${contents.WEB-INF.dir}/web.xml">
+            <lib dir="${contents.libs.dir}"/>
+            <fileset dir="${contents.dir}"/>
+            <classes dir="${output.classes.dir}"/>
+        </war>
+    </target>
+
+</project>
