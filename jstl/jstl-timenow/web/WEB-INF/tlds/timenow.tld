@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE taglib
+        PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+        "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+
+<!-- Each Tag Libary Descriptor contains one libray only -->
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+
+    <!-- General information about the tag (elements are ordered!) -->
+    <tlib-version>1.2.1</tlib-version>
+    <short-name>timenow</short-name>
+    <uri>timenow</uri>
+
+    <!-- One tag element for each library tag -->
+    <tag>
+        <name>now</name>
+        <tag-class>cl.uchile.dcc.cc5604.servlets.jstl.TimeNowTL</tag-class>
+        <body-content>empty</body-content>
+    </tag>
+
+</taglib>
