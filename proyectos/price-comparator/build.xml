@@ -1,0 +1,22 @@
+<project name="price-comparator-server">
+
+    <property name="base.dir" value="." />
+    <property name="src.dir" value="./src" />
+
+    <property name="out.dir" value="${base.dir}/out" />
+    <property name="out.classes.dir" value="${out.dir}/classes" />
+    <property name="out.artifacts.dir" value="${out.dir}/artifacts" />
+
+    <target name="clean">
+        <delete dir="${out.dir}" />
+    </target>
+
+    <target name="compile" depends="clean">
+        <javac srcdir="${src.dir}" destdir="${out.classes.dir}" />
+    </target>
+
+    <target name="jarEJBs" depends="compile">
+        <jar destfile="${out.artifacts.dir}/price-comparator-ejbs.jar" basedir="${out.classes.dir}" />
+    </target>
+
+</project>
