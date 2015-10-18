@@ -2,20 +2,25 @@ package cl.uchile.dcc.cc5604.proyectos.priceComparator;
 
 import cl.uchile.dcc.cc5604.proyectos.priceComparator.domain.Product;
 import cl.uchile.dcc.cc5604.proyectos.priceComparator.domain.Provider;
+import cl.uchile.dcc.cc5604.proyectos.priceComparator.exceptions.ProductAlreadyExistException;
 
+import javax.ejb.Remote;
 import java.util.List;
 
 /**
  * This class is responsible for providing services for products.
  */
+@Remote
 public interface ProductManager {
 
     /**
      * This method is responsible for creating a new product on the general catalog.
      *
      * @param product The product to be created.
+     *
+     * @throws ProductAlreadyExistException Thrown if the Product to be created already exists.
      */
-    public void createProduct(Product product);
+    public void createProduct(Product product) throws ProductAlreadyExistException;
 
     /**
      * This method is responsible for removing a product from the general catalog. There are some business rules that
