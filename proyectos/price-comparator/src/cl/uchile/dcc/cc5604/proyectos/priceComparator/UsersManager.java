@@ -32,7 +32,7 @@ public interface UsersManager {
      *
      * @throws ProductNotFoundException Thrown if there is no such product.
      */
-    public void addProductToList(Product product, User user) throws ProductNotFoundException;
+    public void addProductToList(Product product, User user) throws ProductNotFoundException, UserNotFoundException;
 
     /**
      * This method is responsible for removing a product from a (default by now) list of a user.
@@ -45,7 +45,7 @@ public interface UsersManager {
      *
      * @throws ProductNotFoundException Thrown if there is no such product.
      */
-    public void removedProductToList(Product product, User user) throws ProductNotFoundException;
+    public void removedProductToList(Product product, User user) throws ProductNotFoundException, UserNotFoundException;
 
     /**
      * This method is responsible for removing a product from a (default by now) list of a user.
