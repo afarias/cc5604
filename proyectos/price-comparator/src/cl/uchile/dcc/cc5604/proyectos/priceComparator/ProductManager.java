@@ -53,4 +53,14 @@ public interface ProductManager {
      */
     public List<Product> getProductsFrom(Provider provider);
 
+    /**
+     * This method is responsible for searching the product catalog for products that match (general matching) with a
+     * given name.
+     *
+     * @param productName The name that will be matched against the catalog's products.
+     *
+     * @return A list with all the products matching a given string.
+     */
+    public List<Product> findProductsByName(String productName);
+
 }

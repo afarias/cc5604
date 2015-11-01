@@ -4,7 +4,9 @@ import cl.uchile.dcc.cc5604.proyectos.priceComparator.ProductManager;
 import cl.uchile.dcc.cc5604.proyectos.priceComparator.domain.Product;
 import cl.uchile.dcc.cc5604.proyectos.priceComparator.domain.Provider;
 import cl.uchile.dcc.cc5604.proyectos.priceComparator.exceptions.ProductAlreadyExistException;
+import com.sun.istack.internal.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +16,10 @@ public class ProductManagerDummy implements ProductManager {
 
     /** This dummy product catalog */
     private List<Product> catalog;
+
+    public ProductManagerDummy() {
+        this.catalog = new ArrayList<Product>();
+    }
 
     @Override
     public void createProduct(Product product) throws ProductAlreadyExistException {
@@ -39,5 +45,19 @@ public class ProductManagerDummy implements ProductManager {
     @Override
     public List<Product> getProductsFrom(Provider provider) {
         return this.catalog;
+    }
+
+    @Override
+    public List<Product> findProductsByName(@NotNull String productName) {
+
+        List<Product> resultList = new ArrayList<Product>();
+
+        for (Product product : catalog) {
+            if (product.getName().contains(productName)) {
+                resultList.add(product);
+            }
+        }
+
+        return resultList;
     }
 }

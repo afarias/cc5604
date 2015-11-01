@@ -9,6 +9,15 @@ public class ProviderUserBased extends Provider {
     private User user;
 
     public ProviderUserBased(User user) {
+        super(user.getName());
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
         this.user = user;
     }
 }
