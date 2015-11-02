@@ -5,6 +5,7 @@ import cl.uchile.dcc.cc5604.proyectos.priceComparator.domain.Product;
 import cl.uchile.dcc.cc5604.proyectos.priceComparator.domain.Provider;
 import cl.uchile.dcc.cc5604.proyectos.priceComparator.domain.User;
 import cl.uchile.dcc.cc5604.proyectos.priceComparator.exceptions.ProductNotFoundException;
+import cl.uchile.dcc.cc5604.proyectos.priceComparator.exceptions.ProviderNotFoundException;
 
 import javax.ejb.Remote;
 import java.util.List;
@@ -35,12 +36,14 @@ public interface ProviderManager {
      *
      * @throws ProductNotFoundException If there is no such product.
      */
-    public void createOffer(Provider provider, OfferedProduct offeredProduct) throws ProductNotFoundException;
+    public void createOffer(Provider provider, OfferedProduct offeredProduct) throws ProductNotFoundException, ProviderNotFoundException;
 
-    public void publishOffer(Provider provider, OfferedProduct offeredProduct) throws ProductNotFoundException;
+    public void publishOffer(Provider provider, OfferedProduct offeredProduct) throws ProductNotFoundException, ProviderNotFoundException;
 
     /**
      * This method is responsible for finding any offer made for a given product, by any provider.
+     *
+     * @param product The product whose offers are to be found.
      *
      * @return The list of offers found for the specified <code>product</code>.
      *
@@ -49,10 +52,34 @@ public interface ProviderManager {
     public List<OfferedProduct> searchOffers(Product product) throws ProductNotFoundException;
 
     /**
+     * This method is responsible for finding any offer made for a given product, by any provider.
+     *
+     * @param provider The provider whose offered products are to be found.
+     *
+     * @return The list of offers found for the specified <code>product</code>.
+     */
+    public List<OfferedProduct> searchOffers(Provider provider);
+
+    /**
      * Allows a provider to remove an already existent offer.
      *
      * @param provider       The provider making the offer.
      * @param offeredProduct The product to be offered.
      */
     public void removeOffer(Provider provider, OfferedProduct offeredProduct);
+
+    /**
+     * This method is responsible for removing all the offered products placed by a given <code>provider</code>.
+     *
+     * @param provider The provider whose offered products are to be deleted.
+     */
+    public void removeAllOffers(Provider provider);
+
+    /**
+     * This method is responsible for registering a provider for further use.
+     *
+     * @param provider The provider to be registered.
+     */
+    public void registerProvider(Provider provider);
+
 }

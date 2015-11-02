@@ -3,9 +3,11 @@ package cl.uchile.dcc.cc5604.proyectos.priceComparator.dummies;
 import cl.uchile.dcc.cc5604.proyectos.priceComparator.ProviderManager;
 import cl.uchile.dcc.cc5604.proyectos.priceComparator.domain.*;
 import cl.uchile.dcc.cc5604.proyectos.priceComparator.exceptions.ProductNotFoundException;
+import cl.uchile.dcc.cc5604.proyectos.priceComparator.exceptions.ProviderNotFoundException;
+import com.sun.istack.internal.NotNull;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
-import java.nio.file.ProviderNotFoundException;
 import java.util.*;
 
 /**
@@ -18,6 +20,12 @@ public class ProviderManagerDummy implements ProviderManager {
     private List<Provider> providers = new ArrayList<Provider>();
 
     private Map<Provider, List<OfferedProduct>> offeredProducts = new HashMap<Provider, List<OfferedProduct>>();
+
+    @PostConstruct
+    private void init() {
+        providers = new ArrayList<Provider>();
+        offeredProducts = new HashMap<Provider, List<OfferedProduct>>();
+    }
 
     @Override
     public Provider createProvider(User user) {
@@ -48,7 +56,7 @@ public class ProviderManagerDummy implements ProviderManager {
     }
 
     @Override
-    public void publishOffer(Provider provider, OfferedProduct offeredProduct) throws ProductNotFoundException {
+    public void publishOffer(Provider provider, OfferedProduct offeredProduct) throws ProductNotFoundException, ProviderNotFoundException {
 
         /* Check if there is such provider */
         if (!providers.contains(provider)) {
@@ -65,23 +73,67 @@ public class ProviderManagerDummy implements ProviderManager {
 
     @Override
     public List<OfferedProduct> searchOffers(Product product) throws ProductNotFoundException {
+
+        /* All offered products are retrieved */
         Collection<List<OfferedProduct>> offeredProductsOfAllProviders = offeredProducts.values();
-        List<OfferedProduct> allOfferedProducts= new ArrayList<OfferedProduct>();
+        List<OfferedProduct> allOfferedProducts = new ArrayList<OfferedProduct>();
 
         for (List<OfferedProduct> offeredProductsOfAllProvider : offeredProductsOfAllProviders) {
-            allOfferedProducts.addAll(offeredProductsOfAllProvider);
+            for (OfferedProduct offeredProduct : offeredProductsOfAllProvider) {
+                if (offeredProduct.getProduct().equals(product)) {
+                    allOfferedProducts.add(offeredProduct);
+                }
+            }
         }
 
         return allOfferedProducts;
     }
 
     @Override
+    public List<OfferedProduct> searchOffers(@NotNull Provider provider) {
+
+        if (!offeredProducts.containsKey(provider)) {
+            return new ArrayList<OfferedProduct>();
+        }
+
+        return this.offeredProducts.get(provider);
+    }
+
+    @Override
     public void removeOffer(Provider provider, OfferedProduct offeredProduct) {
-        if(!providers.contains(provider)){
+
+        /*
+         * The existence of the provider is validated first. If the provider does not exists, nothing is done (all its
+         * products are no there any more (they never were either)!) so no exception is thrown
+         */
+        if (!providers.contains(provider)) {
             return;
         }
 
+        /* The list of products offered by this provider is retrieved */
+        List<OfferedProduct> providerProducts = offeredProducts.get(provider);
+        boolean removed = providerProducts.remove(offeredProduct);
+
+        if (removed) {
+            System.out.println("The product " + offeredProduct + " was removed from the offered products.");
+        } else {
+            System.out.println("The product " + offeredProduct + " was not found among the offered products.");
+        }
+    }
+
+    @Override
+    public void removeAllOffers(Provider provider) {
+
+        if (!providers.contains(provider)) {
+            return;
+        }
+
+        /* The provider's offers are removed */
         offeredProducts.remove(provider);
-        providers.remove(provider);
+    }
+
+    @Override
+    public void registerProvider(Provider provider) {
+        providers.add(provider);
     }
 }
