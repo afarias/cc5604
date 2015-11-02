@@ -6,6 +6,7 @@ import cl.uchile.dcc.cc5604.proyectos.priceComparator.exceptions.AuthenticationE
 import cl.uchile.dcc.cc5604.proyectos.priceComparator.exceptions.UserNotFoundException;
 import cl.uchile.dcc.cc5604.proyectos.priceComparator.exceptions.WrongPasswordException;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 
 /**
@@ -15,10 +16,10 @@ import javax.ejb.Stateless;
 public class AuthenticationManagerDummy implements AuthenticationManager {
 
     /** A dummy user for Andres */
-    private final User afariasUser = new User("Andres");
+    private static final User afariasUser = new User("Andres");
 
     /** A dummy user */
-    private final User ivanUser= new User("Ivan");;
+    private static final User ivanUser= new User("Ivan");
 
     @Override
     public User login(String username, String password) throws AuthenticationException {
