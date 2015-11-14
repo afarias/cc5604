@@ -1,0 +1,29 @@
+<project name="login servlet" default="war">
+
+    <property name="wl.home.dir" value="/etc/wls12130" />
+    <property name="wl.modules.dir" value="${wl.home.dir}/oracle_common/modules" />
+
+    <property name="sources.dir" value="./src"/>
+    <property name="output.dir" value="./out"/>
+    <property name="output.classes.dir" value="./out/classes"/>
+    <property name="output.war.dir" value="./out/artifacts"/>
+
+    <target name="clean">
+        <delete dir="${output.dir}"/>
+    </target>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="${output.classes.dir}"/>
+        <javac srcdir="${sources.dir}" destdir="${output.classes.dir}">
+            <classpath>
+                <pathelement location="${wl.modules.dir}/javax.servlet_2.2.0.0_3-0.jar" />
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="war" depends="compile">
+        <war destfile="${output.war.dir}/login.war" webxml="./web/WEB-INF/web.xml">
+            <classes dir="${output.classes.dir}"/>
+        </war>
+    </target>
+</project>

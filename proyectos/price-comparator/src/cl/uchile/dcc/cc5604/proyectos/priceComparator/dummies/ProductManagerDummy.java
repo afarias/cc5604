@@ -6,12 +6,14 @@ import cl.uchile.dcc.cc5604.proyectos.priceComparator.domain.Provider;
 import cl.uchile.dcc.cc5604.proyectos.priceComparator.exceptions.ProductAlreadyExistException;
 import com.sun.istack.internal.NotNull;
 
+import javax.ejb.Stateful;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A dummy implementation for this class.
  */
+@Stateful
 public class ProductManagerDummy implements ProductManager {
 
     /** This dummy product catalog */

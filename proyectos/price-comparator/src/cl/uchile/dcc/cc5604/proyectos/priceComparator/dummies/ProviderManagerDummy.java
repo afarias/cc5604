@@ -27,6 +27,7 @@ public class ProviderManagerDummy implements ProviderManager {
         offeredProducts = new HashMap<Provider, List<OfferedProduct>>();
     }
 
+
     @Override
     public Provider createProvider(User user) {
         /* The provider is created */
