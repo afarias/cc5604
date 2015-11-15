@@ -10,7 +10,7 @@
 
 <h1>Prueba de conexión</h1>
 
-Esta página le permite establecer una conexión a una BDD PosgreSQL (cuyo driver va incluido en esta aplicación).
+<p>Esta página le permite establecer una conexión a una BDD PosgreSQL (cuyo driver va incluido en esta aplicación).</p>
 
 
 <!-- if the DB driver was not loaded successfully, only a warning message is shown -->
@@ -33,7 +33,7 @@ Esta página le permite establecer una conexión a una BDD PosgreSQL (cuyo drive
 
         <!-- Input para el Password -->
         <label for="bdd">
-            Base de datos: <input type="password" id="bdd" name="bdd">
+            Base de datos: <input type="text" id="bdd" name="bdd">
         </label><br/>
 
         <!-- Input para el Usuario -->

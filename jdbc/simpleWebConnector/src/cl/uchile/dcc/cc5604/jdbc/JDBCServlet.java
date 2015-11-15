@@ -8,13 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * This Servlet class allows a DB configuration to be tests creating a connection.
  */
-@WebServlet(urlPatterns = "connectToDB", loadOnStartup = 1)
+@WebServlet(urlPatterns = {"connectToDB"}, loadOnStartup = 1)
 public class JDBCServlet extends HttpServlet {
 
     /** This variable stores the state of whether it was possible to load the driver or not */
@@ -53,19 +55,20 @@ public class JDBCServlet extends HttpServlet {
         String port = req.getParameter("port");
         String bdd = req.getParameter("bdd");
 
-        /* The connection is obtained */
-        Connection connection = getConnection(host, port, bdd, user, password);
+        /* The connection is obtained through the Driver Manager */
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:postgresql://" + host + ":" + port + "/" + bdd, user, password);
 
-        /* And store in the request for further use in the receiver JSP resulting page */
-        req.setAttribute("connection", connection);
+            /* And store in the request for further use in the receiver JSP resulting page */
+            req.setAttribute("connection", connection);
 
-        /* The control is pass to the JSP resulting page */
-        req.getRequestDispatcher("result.jsp").forward(req, resp);
+            /* The control is pass to the JSP resulting page through a request attribute */
+            req.getRequestDispatcher("result.jsp").forward(req, resp);
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, "Un problema ocurrió al obtener la conexión.", e);
+            req.getRequestDispatcher("index.jsp").forward(req, resp);
+        }
+
     }
 
-    private Connection getConnection(String host, String port, String bdd, String user, String password) {
-
-
-        return null;
-    }
 }

@@ -1,8 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <weblogic-web-app xmlns="http://xmlns.oracle.com/weblogic/weblogic-web-app">
 
-    <context-root>jdbc</context-root>
+    <!-- Note this context root: is composed by two folders -->
+    <context-root>jdbc/webConnector</context-root>
 
+    <!-- JSTL is used on the index.jsp page -->
     <library-ref>
         <library-name>jstl</library-name>
         <specification-version>1.2</specification-version>
