@@ -1,16 +1,30 @@
 package cl.uchile.dcc.cc5604.proyectos.priceComparator.domain;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 /**
  * This class is responsible for representing a product offer.
  */
 public class OfferedProduct implements Serializable {
 
+    /** The offered product */
     private Product product;
+
+    /** The value at which the product is offered */
     private double offeredValue;
 
-    public OfferedProduct(Product product, double offeredValue) {
+    /** The stock of the offered product at the given value */
+    private int stock;
+
+    /** The date until which the product is offered */
+    private Calendar expirationDate;
+
+    /** The provider that offers the product */
+    private Provider provider;
+
+    public OfferedProduct(Provider provider, Product product, double offeredValue) {
+        this.provider = provider;
         this.product = product;
         this.offeredValue = offeredValue;
     }
@@ -29,5 +43,29 @@ public class OfferedProduct implements Serializable {
 
     public void setOfferedValue(double offeredValue) {
         this.offeredValue = offeredValue;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public Calendar getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(Calendar expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public Provider getProvider() {
+        return provider;
+    }
+
+    public void setProvider(Provider provider) {
+        this.provider = provider;
     }
 }

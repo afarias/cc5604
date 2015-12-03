@@ -57,19 +57,8 @@ public class ProviderManagerDummy implements ProviderManager {
     }
 
     @Override
-    public void publishOffer(Provider provider, OfferedProduct offeredProduct) throws ProductNotFoundException, ProviderNotFoundException {
-
-        /* Check if there is such provider */
-        if (!providers.contains(provider)) {
-            throw new ProviderNotFoundException("Provider " + provider.getName() + " does not exists.");
-        }
-
-        /* If there are no products for this providers, it is added to the map */
-        if (!offeredProducts.containsKey(provider)) {
-            offeredProducts.put(provider, new ArrayList<OfferedProduct>());
-        }
-
-        offeredProducts.get(provider).add(offeredProduct);
+    public List<OfferedProduct> getProductHistory(Provider provider, Product product) {
+        return null;
     }
 
     @Override

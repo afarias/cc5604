@@ -38,7 +38,15 @@ public interface ProviderManager {
      */
     public void createOffer(Provider provider, OfferedProduct offeredProduct) throws ProductNotFoundException, ProviderNotFoundException;
 
-    public void publishOffer(Provider provider, OfferedProduct offeredProduct) throws ProductNotFoundException, ProviderNotFoundException;
+    /**
+     * This method is responsible for retrieving the history of offers made by a given provider for a given product.
+     *
+     * @param provider The provider that has offered the product.
+     * @param product  The product whose offers are retrieved for the specific provider.
+     *
+     * @return A list of offers offered for the product by the provider.
+     */
+    public List<OfferedProduct> getProductHistory(Provider provider, Product product);
 
     /**
      * This method is responsible for finding any offer made for a given product, by any provider.
