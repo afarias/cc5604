@@ -4,6 +4,8 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,6 +33,8 @@ public class LifeCycleServlet extends HttpServlet {
         super.init(config);
         logger.log(Level.INFO, "The servlet has been instantiated.");
     }
+
+
 
     /**
      * This method is responsible for execute custom instructions before the servlet is destroyed.

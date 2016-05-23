@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class JDBCServlet extends HttpServlet {
 
     /** This variable stores the state of whether it was possible to load the driver or not */
-    private boolean driverFound = true;
+    private boolean driverFound;
 
     private static final Logger logger = Logger.getLogger(JDBCServlet.class.getName());
 

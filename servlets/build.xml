@@ -1,0 +1,31 @@
+<project name="LifeCycle" default="jar">
+
+    <property name="BUILD_DIR" value="./out"/>
+    <property name="CLASSES_DIR" value="${BUILD_DIR}/classes"/>
+    <property name="ARTIFACTS_DIR" value="${BUILD_DIR}/artifacts"/>
+
+    <property name="SOURCES" value="./life-cycle/src"/>
+
+    <property name="JBOSS_DIR" value="/etc/jboss-as-7.1.1"/>
+
+    <target name="clean">
+        <delete dir="${BUILD_DIR}"/>
+    </target>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="${BUILD_DIR}/classes"/>
+        <javac srcdir="${SOURCES}" destdir="${BUILD_DIR}/classes">
+            <classpath path="${JBOSS_DIR}/modules/javax/servlet/api/main/jboss-servlet-api_3.0_spec-1.0.0.Final.jar" />
+        </javac>
+    </target>
+
+    <target name="jar" depends="compile">
+        <jar destfile="${ARTIFACTS_DIR}/lifecycle.jar" basedir="${CLASSES_DIR}" />
+    </target>
+
+    <target name="war" depends="compile">
+        <war destfile="${ARTIFACTS_DIR}/lifecycle.war" webxml="life-cycle/web/WEB-INF/web.xml">
+            <classes dir="${CLASSES_DIR}" />
+        </war>
+    </target>
+</project>

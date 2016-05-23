@@ -3,4 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+
+    <servlet>
+        <servlet-name>GustavoServlet</servlet-name>
+        <servlet-class>cl.uchile.dcc.cc5604.servlets.lifecycle.GustavoServlet</servlet-class>
+
+        <init-param>
+            <param-name>Age</param-name>
+            <param-value>24</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GustavoServlet</servlet-name>
+        <url-pattern>/gustavo</url-pattern>
+    </servlet-mapping>
 </web-app>

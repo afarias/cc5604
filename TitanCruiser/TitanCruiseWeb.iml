@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
   <component name="FacetManager">
-    <facet type="ejb" name="EJB">
+    <facet type="web" name="Web">
       <configuration>
-        <ejbRoots>
-          <root url="file://$MODULE_DIR$/TitanCruiserEJBs/src" />
-        </ejbRoots>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/TitanCruiseWeb/web/WEB-INF/web.xml" />
+          <deploymentDescriptor name="weblogic.xml" url="file://$MODULE_DIR$/TitanCruiseWeb/web/WEB-INF/weblogic.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/TitanCruiseWeb/web" relative="/" />
+        </webroots>
       </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$/TitanCruiserEJBs">
-      <sourceFolder url="file://$MODULE_DIR$/TitanCruiserEJBs/src" isTestSource="false" />
+    <content url="file://$MODULE_DIR$/TitanCruiseWeb">
+      <sourceFolder url="file://$MODULE_DIR$/TitanCruiseWeb/src" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
