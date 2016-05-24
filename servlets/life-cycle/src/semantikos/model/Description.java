@@ -22,21 +22,38 @@ package semantikos.model;
  */
 public class Description {
 
+
+
 	private String termino;
-	/**
-	 * Identificador
-	 */
 	private int id;
 	private boolean caseSensitive;
 	private String descriptionType;
-	/**
-	 * Una descripci�n puede estar vigente o no.
-	 */
 	private boolean isActive;
 
-	public Description(){
-
+	public Description(int id, String termino){
+		this.id=id;
+		this.termino=termino;
 	}
+	public String getTermino() {
+		return termino;
+	}
+
+	public void setTermino(String termino) {
+		this.termino = termino;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String toString(){
+		return "ID: "+getId()+" Termino: "+getTermino();
+	}
+
 
 	public void finalize() throws Throwable {
 

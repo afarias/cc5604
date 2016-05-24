@@ -3,6 +3,7 @@ package semantikos.core;
 import semantikos.model.Description;
 
 import javax.ejb.Local;
+import java.util.ArrayList;
 
 /**
  * This interfaces defines the behaviour of the Concept Manger Component.
@@ -17,5 +18,5 @@ public interface IConceptManagerLocal {
      *
      * @return The description.
      */
-    public Description findConceptByID(int id);
+    public ArrayList<Description> findDescriptionByIDConcept(int id);
 }

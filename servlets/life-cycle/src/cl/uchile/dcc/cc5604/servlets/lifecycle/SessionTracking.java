@@ -29,7 +29,6 @@ public class SessionTracking extends HttpServlet {
 
         out.println("<form method=post>");
         out.println("<h2>" + op1 + " + " + op2 + " = ");
-        out.println("<input type=text size=4 name=resultado>");
         out.println("<input type=submit value=corregir>");
         out.close();
     }
